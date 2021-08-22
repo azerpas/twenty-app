@@ -79,7 +79,7 @@ const FOOTER_CONTENT: ViewStyle = {
 
 export const WelcomeScreen = observer(function WelcomeScreen() {
   const navigation = useNavigation()
-  const nextScreen = () => navigation.navigate("demo")
+  const nextScreen = () => navigation.navigate("hello")
 
   return (
     <View testID="WelcomeScreen" style={FULL}>
@@ -87,7 +87,7 @@ export const WelcomeScreen = observer(function WelcomeScreen() {
       <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
         <Header headerTx="welcomeScreen.poweredBy" style={HEADER} titleStyle={HEADER_TITLE} />
         <Text style={TITLE_WRAPPER}>
-          <Text style={TITLE} text="Your new app, " />
+          <Text style={TITLE} text="TWENTY, " />
           <Text style={ALMOST} text="almost" />
           <Text style={TITLE} text="!" />
         </Text>
