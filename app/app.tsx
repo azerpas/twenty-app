@@ -15,6 +15,7 @@ import React, { useState, useEffect, useRef } from "react"
 import { NavigationContainerRef } from "@react-navigation/native"
 import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-context"
 import { initFonts } from "./theme/fonts" // expo
+import { NativeBaseProvider } from "native-base"
 import * as storage from "./utils/storage"
 import {
   useBackButtonHandler,
@@ -66,13 +67,15 @@ function App() {
   return (
     <ToggleStorybook>
       <RootStoreProvider value={rootStore}>
-        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <RootNavigator
-            ref={navigationRef}
-            initialState={initialNavigationState}
-            onStateChange={onNavigationStateChange}
-          />
-        </SafeAreaProvider>
+        <NativeBaseProvider>
+          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+            <RootNavigator
+              ref={navigationRef}
+              initialState={initialNavigationState}
+              onStateChange={onNavigationStateChange}
+            />
+          </SafeAreaProvider>
+        </NativeBaseProvider>
       </RootStoreProvider>
     </ToggleStorybook>
   )
