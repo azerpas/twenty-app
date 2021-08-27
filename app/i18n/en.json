@@ -30,5 +30,8 @@
   "storybook": {
     "placeholder": "Placeholder",
     "field": "Field"
+  },
+  "helloScreen": {
+    "continue": "Start investing"
   }
 }
