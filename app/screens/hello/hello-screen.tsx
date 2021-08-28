@@ -13,7 +13,7 @@ const FULL_HEIGHT: ViewStyle = {
 
 export const Hello = observer(() => {
     const navigation = useNavigation()
-    const toAuth = () => navigation.navigate("welcome");
+    const toAuth = () => navigation.navigate("auth");
     return(
         <View>
             <Screen preset="scroll" backgroundColor="transparent" style={FULL_HEIGHT}>
