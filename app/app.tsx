@@ -26,6 +26,7 @@ import {
 } from "./navigators"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models"
 import { ToggleStorybook } from "../storybook/toggle-storybook"
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
@@ -39,46 +40,56 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
  * This is the root component of our app.
  */
 function App() {
-  const navigationRef = useRef<NavigationContainerRef>(null)
-  const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
+    const navigationRef = useRef<NavigationContainerRef>(null)
+    const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
+    const [user, setUser] = useState<FirebaseAuthTypes.User|undefined>();
 
-  setRootNavigation(navigationRef)
-  useBackButtonHandler(navigationRef, canExit)
-  const { initialNavigationState, onNavigationStateChange } = useNavigationPersistence(
-    storage,
-    NAVIGATION_PERSISTENCE_KEY,
-  )
+    setRootNavigation(navigationRef)
+    useBackButtonHandler(navigationRef, canExit)
+    const { initialNavigationState, onNavigationStateChange } = useNavigationPersistence(
+        storage,
+        NAVIGATION_PERSISTENCE_KEY,
+    )
 
-  // Kick off initial async loading actions, like loading fonts and RootStore
-  useEffect(() => {
-    ;(async () => {
-      await initFonts() // expo
-      setupRootStore().then(setRootStore)
-    })()
-  }, [])
+    // Handle user state changes
+    const onAuthStateChanged = (user: FirebaseAuthTypes.User) => setUser(user);
 
-  // Before we show the app, we have to wait for our state to be ready.
-  // In the meantime, don't render anything. This will be the background
-  // color set in native by rootView's background color. You can replace
-  // with your own loading component if you wish.
-  if (!rootStore) return null
+    // Init Firebase on auth state change
+    useEffect(() => {
+        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+        return subscriber; // unsubscribe on unmount
+    }, []);
 
-  // otherwise, we're ready to render the app
-  return (
-    <ToggleStorybook>
-      <RootStoreProvider value={rootStore}>
-        <NativeBaseProvider>
-          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-            <RootNavigator
-              ref={navigationRef}
-              initialState={initialNavigationState}
-              onStateChange={onNavigationStateChange}
-            />
-          </SafeAreaProvider>
-        </NativeBaseProvider>
-      </RootStoreProvider>
-    </ToggleStorybook>
-  )
+    // Kick off initial async loading actions, like loading fonts and RootStore
+    useEffect(() => {
+        ;(async () => {
+        await initFonts() // expo
+        setupRootStore().then(setRootStore)
+        })()
+    }, [])
+
+    // Before we show the app, we have to wait for our state to be ready.
+    // In the meantime, don't render anything. This will be the background
+    // color set in native by rootView's background color. You can replace
+    // with your own loading component if you wish.
+    if (!rootStore) return null
+
+    // otherwise, we're ready to render the app
+    return (
+        <ToggleStorybook>
+        <RootStoreProvider value={rootStore}>
+            <NativeBaseProvider>
+            <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+                <RootNavigator
+                ref={navigationRef}
+                initialState={initialNavigationState}
+                onStateChange={onNavigationStateChange}
+                />
+            </SafeAreaProvider>
+            </NativeBaseProvider>
+        </RootStoreProvider>
+        </ToggleStorybook>
+    )
 }
 
 export default App
