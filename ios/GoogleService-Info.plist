@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>133373313355-bodrs6h6q1j0j7ts0e3tdavs857npch1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.133373313355-bodrs6h6q1j0j7ts0e3tdavs857npch1</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>133373313355-0aqc4ckr3mjj3sm7rhav8eg4f14heetl.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA-LJKUN95yAMpWBgPCxnB3Y5Ja97rJHjc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>133373313355</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.twenty.earn</string>
+	<key>PROJECT_ID</key>
+	<string>twenty-terra</string>
+	<key>STORAGE_BUCKET</key>
+	<string>twenty-terra.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:133373313355:ios:5583c1044ef73085bf28ce</string>
+</dict>
+</plist>
