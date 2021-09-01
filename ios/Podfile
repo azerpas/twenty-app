@@ -5,7 +5,7 @@ require_relative '../node_modules/react-native-unimodules/cocoapods.rb'
 platform :ios, '10.0'
 project './HelloWorld.xcodeproj'
 
-target 'HelloWorld' do
+target 'Twenty' do
   use_unimodules!
   config = use_native_modules!
 
@@ -15,7 +15,7 @@ target 'HelloWorld' do
     :hermes_enabled => false
   )
 
-  target 'HelloWorldTests' do
+  target 'TwentyTests' do
     inherit! :complete
     # Pods for testing
   end
