@@ -32,6 +32,7 @@ import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
 // https://github.com/kmagiera/react-native-screens#using-native-stack-navigator
 import { enableScreens } from "react-native-screens"
+import { IUserContext, UserContext } from "./context/user"
 enableScreens()
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
@@ -42,7 +43,7 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 function App() {
     const navigationRef = useRef<NavigationContainerRef>(null)
     const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
-    const [user, setUser] = useState<FirebaseAuthTypes.User|undefined>();
+    const [user, setUser] = useState<IUserContext|null>(null);
 
     setRootNavigation(navigationRef)
     useBackButtonHandler(navigationRef, canExit)
@@ -76,19 +77,21 @@ function App() {
 
     // otherwise, we're ready to render the app
     return (
-        <ToggleStorybook>
-        <RootStoreProvider value={rootStore}>
-            <NativeBaseProvider>
-            <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-                <RootNavigator
-                ref={navigationRef}
-                initialState={initialNavigationState}
-                onStateChange={onNavigationStateChange}
-                />
-            </SafeAreaProvider>
-            </NativeBaseProvider>
-        </RootStoreProvider>
-        </ToggleStorybook>
+        <UserContext.Provider value={user}>
+            <ToggleStorybook>
+                <RootStoreProvider value={rootStore}>
+                    <NativeBaseProvider>
+                        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+                            <RootNavigator
+                            ref={navigationRef}
+                            initialState={initialNavigationState}
+                            onStateChange={onNavigationStateChange}
+                            />
+                        </SafeAreaProvider>
+                    </NativeBaseProvider>
+                </RootStoreProvider>
+            </ToggleStorybook>
+        </UserContext.Provider>
     )
 }
 
