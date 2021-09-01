@@ -1,0 +1,47 @@
+{
+    "project_info": {
+      "project_number": "133373313355",
+      "project_id": "twenty-terra",
+      "storage_bucket": "twenty-terra.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:133373313355:android:c25e2f2829ef00dabf28ce",
+          "android_client_info": {
+            "package_name": "com.twenty.earn"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "133373313355-0aqc4ckr3mjj3sm7rhav8eg4f14heetl.apps.googleusercontent.com",
+            "client_type": 1,
+            "android_info": {
+              "package_name": "com.twenty.earn",
+              "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            }
+          },
+          {
+            "client_id": "133373313355-r00hddoe1ae53lke4dqv4ug6vqp3n1m7.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyA5mcdtdfi-nyRXzZ3g7mikrVsEkIPYMAY"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "133373313355-r00hddoe1ae53lke4dqv4ug6vqp3n1m7.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

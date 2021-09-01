@@ -1,4 +1,6 @@
 apply plugin: "com.android.application"
+// Required by Firebase
+apply plugin: 'com.google.gms.google-services'
 // Unimodules: https://docs.expo.io/bare/installing-unimodules/#configuration-for-android
 apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
 
@@ -215,6 +217,9 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    // Required by Firebase
+    classpath 'com.google.gms:google-services:4.3.10'
 }
 
 // Run this once to be able to run the application with BUCK

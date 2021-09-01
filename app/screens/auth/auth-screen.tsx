@@ -1,18 +1,23 @@
-import React from "react"
+import React, { useEffect, useContext } from "react"
 import { observer } from "mobx-react-lite";
 import { Screen, View, Text } from "../../components";
 import { Button, Container, FormControl, Input } from "native-base";
 import { useForm, Controller } from 'react-hook-form';
+import { UserContext } from "../../context/user";
 
 type FormValues = {
     email: string;
 }
 
 export const AuthScreen = observer(() => {
+    const user = useContext(UserContext);
     const { register, setValue, handleSubmit, control, formState: { errors } } = useForm<FormValues>();
     const onSubmit = data => {
         console.log(data);
     };
+    useEffect(() => {
+        console.log(user);
+    }, [user])
     return(
         <View>
             <Screen preset="scroll" backgroundColor="transparent">
