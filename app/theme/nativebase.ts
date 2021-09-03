@@ -3,7 +3,7 @@ import { palette } from "./palette";
 
 export const theme: ITheme = extendTheme({
     colors: {
-        primary: {
+        primary: { // https://maketintsandshades.com/#0B31B6
             50: "#8598db",
             100: "#6d83d3",
             200: "#546fcc",
