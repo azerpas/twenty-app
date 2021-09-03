@@ -7,6 +7,7 @@ import { UserContext } from "../../context/user";
 import { TextStyle } from "react-native";
 import styled from "@emotion/native";
 import { LogoSvg } from "../../components/svg/logo";
+import {email as emailPattern} from "../../utils/pattern";
 
 type FormValues = {
     email: string;
@@ -26,7 +27,7 @@ export const AuthScreen = observer(() => {
     }, [user])
 
     const HelperText = styled.Text<{valid?: boolean}>((props) => ({
-        color: props.valid ? colors.green : colors.black,
+        color: props.valid ? colors.gray["600"] : colors.gray["400"],
         fontWeight: props.valid ? "800" : "normal"
     }))
 
@@ -44,19 +45,20 @@ export const AuthScreen = observer(() => {
                                 render={({field: { onChange, onBlur, value }}) => (
                                     <FormControl isRequired>
                                         <FormControl.Label> Email </FormControl.Label>
-                                        <Input placeholder="email@gmail.com" onChangeText={value => onChange(value)} onBlur={onBlur} value={value}/>
+                                        <Input isInvalid={errors.email && true} placeholder="email@gmail.com" onChangeText={value => onChange(value)} onBlur={onBlur} value={value} type="email"/>
+                                        {errors.email && <FormControl.ErrorMessage>{errors.email.message}</FormControl.ErrorMessage>}
                                         <FormControl.HelperText>We will not spam you, I promess</FormControl.HelperText>
                                     </FormControl>  
                                 )}
                                 name="email"
-                                rules={{required: true}}
+                                rules={{required: true, pattern: emailPattern}}
                             />
                             <Controller
                                 control={control}
                                 render={({field: { onChange, onBlur, value }}) => (
                                     <FormControl isRequired>
                                         <FormControl.Label> Password </FormControl.Label>
-                                        <Input type="password" onChangeText={value => onChange(value)} onBlur={onBlur} value={value}/>
+                                        <Input isInvalid={errors.password && true} type="password" onChangeText={value => onChange(value)} onBlur={onBlur} value={value}/>
                                         <FormControl.HelperText>
                                             <Box ml="2">
                                                 <HelperText valid={value?.length > 7}>
