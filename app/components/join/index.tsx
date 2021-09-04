@@ -12,7 +12,7 @@ import {email as emailPattern, password as passwordPattern} from "../../utils/pa
 import { FormValues } from "./index.props";
 
 export const Form = () => {
-    const { getValues, setValue, handleSubmit, control, formState: { errors, isSubmitting }, setError } = useForm<FormValues>();
+    const { getValues, handleSubmit, control, formState: { errors, isSubmitting }, setError } = useForm<FormValues>();
     const [submitError, setSubmitError] = useState<string | undefined>(undefined);
 
     const onSubmit = async (data: FormValues) => {
@@ -28,6 +28,14 @@ export const Form = () => {
             }
         }
     };
+    if(submitError){
+        return(
+            <>
+                <Text>{submitError}</Text>
+                <Button>Continue</Button>
+            </>
+        )
+    }
     return(
         <>
             <Controller
