@@ -6,8 +6,6 @@ import { UserContext } from "../../context/user";
 import { LogoSvg } from "../../components/svg/logo";
 import { Form as FormJoin } from "../../components/join";
 
-
-
 export const AuthScreen = observer(() => {
     const user = useContext(UserContext);
 

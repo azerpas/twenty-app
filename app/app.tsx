@@ -34,6 +34,7 @@ import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import { enableScreens } from "react-native-screens"
 import { IUserContext, UserContext } from "./context/user"
 import { theme } from "./theme/nativebase"
+import { useFlipper } from "@react-navigation/devtools"
 enableScreens()
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
@@ -46,7 +47,9 @@ function App() {
     const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
     const [user, setUser] = useState<IUserContext|null>(null);
 
-    setRootNavigation(navigationRef)
+    useFlipper(navigationRef);
+
+    setRootNavigation(navigationRef);
     useBackButtonHandler(navigationRef, canExit)
     const { initialNavigationState, onNavigationStateChange } = useNavigationPersistence(
         storage,
