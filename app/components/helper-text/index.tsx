@@ -1,13 +1,15 @@
 import styled from "@emotion/native";
 import React from "react";
 import { useTheme } from "native-base";
+import { HelperTextProps } from "./index.props";
 
-export const HelperText = ({valid, children}: {valid: boolean, children: React.ReactNode}) => {
+export const HelperText = ({valid, children, highlight}: HelperTextProps) => {
     const { colors } = useTheme();
-    const Helper = styled.Text<{valid?: boolean}>((props) => ({
-        color: props.valid ? colors.gray["600"] : colors.gray["400"],
+    console.log(`${highlight} ${valid}`)
+    const Helper = styled.Text<{valid?: boolean, highlight?: boolean}>((props) => ({
+        color: props.valid ? colors.gray["600"] : (props.highlight ? colors.red["500"] : colors.gray["400"]),
         fontWeight: props.valid ? "800" : "normal"
-    }))
+    }));
 
-    return <Helper valid={valid}>{children}</Helper>
+    return <Helper valid={valid} highlight={highlight}>{children}</Helper>
 }
