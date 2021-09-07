@@ -22,8 +22,8 @@ import { PrimaryParamList } from "."
  *   https://reactnavigation.org/docs/typescript#type-checking-the-navigator
  */
 export type RootParamList = {
-  mainStack: undefined
-}
+    mainStack: undefined
+} & PrimaryParamList
 
 export type TabParamList = {
 
@@ -51,10 +51,10 @@ const RootStack = () => {
 }
 
 export const RootNavigator = React.forwardRef<
-  NavigationContainerRef,
+  NavigationContainerRef<RootParamList>,
   Partial<React.ComponentProps<typeof NavigationContainer>>
 >((props, ref: any) => {
-  // ^ (any) : FIXME: tempo fix
+    // ^ Temporary fix "ref" FIXME:
   return (
     <NavigationContainer {...props} ref={ref}>
       <RootStack />
