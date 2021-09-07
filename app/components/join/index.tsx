@@ -18,7 +18,7 @@ export const Form = () => {
     const { getValues, handleSubmit, control, formState: { errors, isSubmitting }, setError } = useForm<FormValues>();
     const [submitError, setSubmitError] = useState<string | undefined>(undefined);
     const navigation = useNavigation<StackNavigationProp<PrimaryParamList>>()
-    const toAuth = () => navigation.navigate("welcome");
+    const toAuth = () => navigation.navigate("start");
 
     const onSubmit = async (data: FormValues) => {
         try {
