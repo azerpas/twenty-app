@@ -14,6 +14,8 @@ import {
 import { color, spacing } from "../../theme"
 import { Api } from "../../services/api"
 import { save } from "../../utils/storage"
+import { StackNavigationProp } from "@react-navigation/stack"
+import { PrimaryParamList } from "../../navigators"
 export const logoIgnite = require("./logo-ignite.png")
 export const heart = require("./heart.png")
 
@@ -93,7 +95,7 @@ const platformCommand = Platform.select({
 })
 
 export const DemoScreen = observer(function DemoScreen() {
-  const navigation = useNavigation()
+  const navigation = useNavigation<StackNavigationProp<PrimaryParamList>>()
   const goBack = () => navigation.goBack()
 
   const demoReactotron = React.useMemo(

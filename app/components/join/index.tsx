@@ -10,10 +10,15 @@ import auth from '@react-native-firebase/auth';
 // Misc
 import {email as emailPattern, password as passwordPattern} from "../../utils/pattern";
 import { FormValues } from "./index.props";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { PrimaryParamList } from "../../navigators";
 
 export const Form = () => {
     const { getValues, handleSubmit, control, formState: { errors, isSubmitting }, setError } = useForm<FormValues>();
     const [submitError, setSubmitError] = useState<string | undefined>(undefined);
+    const navigation = useNavigation<StackNavigationProp<PrimaryParamList>>()
+    const toAuth = () => navigation.navigate("welcome");
 
     const onSubmit = async (data: FormValues) => {
         try {
@@ -112,6 +117,9 @@ export const Form = () => {
             />
             <Button onPress={handleSubmit(onSubmit)} variant="solid" colorScheme="primary" w="100%" shadow="3" isDisabled={isSubmitting}>
                 <Text tx="authScreen.join"/>
+            </Button>
+            <Button onPress={toAuth} variant="solid" colorScheme="secondary" w="100%" shadow="3" isDisabled={isSubmitting}>
+                No
             </Button>
         </>
     )

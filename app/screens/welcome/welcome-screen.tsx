@@ -4,6 +4,8 @@ import { useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
 import { Button, Header, Screen, Text, Wallpaper, AutoImage as Image } from "../../components"
 import { color, spacing, typography } from "../../theme"
+import { StackNavigationProp } from "@react-navigation/stack"
+import { PrimaryParamList } from "../../navigators"
 const bowserLogo = require("./bowser.png")
 
 const FULL: ViewStyle = { flex: 1 }
@@ -78,7 +80,7 @@ const FOOTER_CONTENT: ViewStyle = {
 }
 
 export const WelcomeScreen = observer(function WelcomeScreen() {
-  const navigation = useNavigation()
+  const navigation = useNavigation<StackNavigationProp<PrimaryParamList>>()
   const nextScreen = () => navigation.navigate("hello")
 
   return (

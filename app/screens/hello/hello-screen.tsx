@@ -6,13 +6,15 @@ import { Flex, Heading, Button, Container } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { ViewStyle } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { PrimaryParamList } from "../../navigators";
 
 const FULL_HEIGHT: ViewStyle = {
     height: "100%"
 }
 
 export const Hello = observer(() => {
-    const navigation = useNavigation()
+    const navigation = useNavigation<StackNavigationProp<PrimaryParamList>>()
     const toAuth = () => navigation.navigate("auth");
     return(
         <View>
