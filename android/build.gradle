@@ -11,6 +11,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath("com.android.tools.build:gradle:4.1.0")
@@ -18,6 +19,11 @@ buildscript {
         // in the individual module build.gradle files
         // Firebase
         classpath 'com.google.gms:google-services:4.3.10'
+
+        // Flipper
+        debugImplementation 'com.facebook.flipper:flipper:0.105.0'  
+        debugImplementation 'com.facebook.soloader:soloader:0.10.1'
+        releaseImplementation 'com.facebook.flipper:flipper-noop:0.105.0'
     }
 }
 

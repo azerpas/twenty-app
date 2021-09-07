@@ -23,6 +23,7 @@ import {
   canExit,
   setRootNavigation,
   useNavigationPersistence,
+  PrimaryParamList,
 } from "./navigators"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models"
 import { ToggleStorybook } from "../storybook/toggle-storybook"
@@ -43,7 +44,7 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
  * This is the root component of our app.
  */
 function App() {
-    const navigationRef = useRef<NavigationContainerRef>(null)
+    const navigationRef = useRef<NavigationContainerRef<PrimaryParamList>>(null)
     const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
     const [user, setUser] = useState<IUserContext|null>(null);
 
