@@ -1,6 +1,8 @@
-import React, {useState} from "react";
+import React, { useState, useImperativeHandle } from "react";
 import { Badge, Button, CheckIcon, Select } from "native-base";
 import { BadgeMnemonicProps, BadgeSelectProps } from "./index.props";
+import { ISelectComponentType } from "native-base/lib/typescript/components/primitives/Select";
+import { string } from "mobx-state-tree/dist/internal";
 
 export const BadgeMnemonic = (props: BadgeMnemonicProps) => {
     const {number, text, ...rest} = props;
@@ -21,9 +23,19 @@ export const BadgeMnemonic = (props: BadgeMnemonicProps) => {
     );
 }
 
-export const BadgeSelect = (props: BadgeSelectProps) => {
+export type SelectedHandle = {
+    getSelectedWord: () => [string,number];
+}
+
+// eslint-disable-next-line react/display-name
+export const BadgeSelect = React.forwardRef((props: BadgeSelectProps, ref: React.ForwardedRef<SelectedHandle>) => {
     const {number, text, list, ...rest} = props;
     const [word, setWord] = useState<string>();
+
+    useImperativeHandle(ref, () => ({
+        getSelectedWord: () => [word, number-1]
+    }), [word]);
+
     return(
         <Button
             startIcon={
@@ -55,4 +67,4 @@ export const BadgeSelect = (props: BadgeSelectProps) => {
             </Select>
         </Button>
     );
-} 
+})
