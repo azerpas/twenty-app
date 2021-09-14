@@ -45,7 +45,7 @@ export const BadgeSelect = React.forwardRef((props: BadgeSelectProps, ref: React
             }
             isDisabled
             variant={"outline"}
-            size={"sm"}
+            size="sm"
             {...rest}
         >
             <Select
@@ -58,6 +58,7 @@ export const BadgeSelect = React.forwardRef((props: BadgeSelectProps, ref: React
                     endIcon: <CheckIcon size={4} />,
                 }}
                 minWidth={100}
+                placeholder="Select"
             >
                 {
                     list.map((value, index) => {

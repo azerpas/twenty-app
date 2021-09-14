@@ -33,6 +33,7 @@ export const ConfirmMnemonic = (props: MnemonicProps) => {
         const [word, number] = wordSelector.getSelectedWord()
         wordsSelected[number] = word;
         setWordsSelected(wordsSelected);
+        // Remove words already selected from list of availables
         setWordsAvailable(words.filter(word => !wordsSelected.includes(word)).sort());
     }, [])
 
@@ -54,7 +55,12 @@ export const ConfirmMnemonic = (props: MnemonicProps) => {
                     )
                 }
             </Flex>
-            <Button isDisabled={phrase !== wordsSelected.join(" ")} w="100%">Start earning</Button>
+            <Button 
+                isDisabled={phrase !== wordsSelected.join(" ")} 
+                w="100%"
+            >
+                Start earning
+            </Button>
         </>
     );
 }
