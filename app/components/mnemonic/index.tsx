@@ -2,6 +2,8 @@ import React, {useRef, useCallback, useState} from "react";
 import { MnemonicProps } from "./index.props";
 import { Button, Flex, Text } from "native-base";
 import { BadgeMnemonic, BadgeSelect, SelectedHandle } from "../badge-mnemonic";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { EXISTING_USER, TRUE } from "../../utils/constants/storage";
 
 export const Mnemonic = (props: MnemonicProps) => {
     const { phrase } = props;
@@ -35,7 +37,11 @@ export const ConfirmMnemonic = (props: MnemonicProps) => {
         setWordsSelected(wordsSelected);
         // Remove words already selected from list of availables
         setWordsAvailable(words.filter(word => !wordsSelected.includes(word)).sort());
-    }, [])
+    }, []);
+
+    const submit = async () => {
+        await AsyncStorage.setItem(EXISTING_USER, TRUE);
+    }
 
     if(words.length !== 24)
         return(
