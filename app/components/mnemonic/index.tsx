@@ -4,6 +4,7 @@ import { Button, Flex, Text } from "native-base";
 import { BadgeMnemonic, BadgeSelect, SelectedHandle } from "../badge-mnemonic";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { EXISTING_USER, TRUE } from "../../utils/constants/storage";
+import SecureKeychain, { PasswordType } from "../../services/wallet/SecureKeychain";
 
 export const Mnemonic = (props: MnemonicProps) => {
     const { phrase } = props;
@@ -41,6 +42,8 @@ export const ConfirmMnemonic = (props: MnemonicProps) => {
 
     const submit = async () => {
         await AsyncStorage.setItem(EXISTING_USER, TRUE);
+        const password = "";
+        await SecureKeychain.setGenericPassword(password, PasswordType.BIOMETRICS);
     }
 
     if(words.length !== 24)
