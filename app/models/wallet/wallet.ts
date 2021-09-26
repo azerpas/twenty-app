@@ -5,6 +5,9 @@ import { Instance, SnapshotOut, types } from "mobx-state-tree"
  */
 export const WalletModel = types.model("Wallet").props({
     publicKey: types.maybe(types.string),
+    /**
+     * Private key stored as 'hex'
+     */
     privateKey: types.maybe(types.string)
 })
 

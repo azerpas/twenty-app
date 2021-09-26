@@ -11,6 +11,8 @@
  */
 import "./i18n"
 import "./utils/ignore-warnings"
+import 'node-libs-react-native/globals';
+import 'react-native-get-random-values';
 import React, { useState, useEffect, useRef } from "react"
 import { NavigationContainerRef } from "@react-navigation/native"
 import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-context"
@@ -25,7 +27,7 @@ import {
   useNavigationPersistence,
   RootParamList,
 } from "./navigators"
-import { RootStore, RootStoreProvider, setupRootStore } from "./models"
+import { RootStore, RootStoreProvider, setupRootStore, MemoryStoreProvider, MemoryStore } from "./models"
 import { ToggleStorybook } from "../storybook/toggle-storybook"
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
@@ -46,6 +48,7 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 function App() {
     const navigationRef = useRef<NavigationContainerRef<RootParamList>>(null)
     const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
+    const [memoryStore, setMemoryStore] = useState<MemoryStore | undefined>(undefined)
     const [user, setUser] = useState<IUserContext|null>(null);
 
     useFlipper(navigationRef);
@@ -85,15 +88,17 @@ function App() {
         <UserContext.Provider value={user}>
             <ToggleStorybook>
                 <RootStoreProvider value={rootStore}>
-                    <NativeBaseProvider theme={theme}>
-                        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-                            <RootNavigator
-                            ref={navigationRef}
-                            initialState={initialNavigationState}
-                            onStateChange={onNavigationStateChange}
-                            />
-                        </SafeAreaProvider>
-                    </NativeBaseProvider>
+                    <MemoryStoreProvider value={memoryStore}>
+                        <NativeBaseProvider theme={theme}>
+                            <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+                                <RootNavigator
+                                ref={navigationRef}
+                                initialState={initialNavigationState}
+                                onStateChange={onNavigationStateChange}
+                                />
+                            </SafeAreaProvider>
+                        </NativeBaseProvider>
+                    </MemoryStoreProvider>
                 </RootStoreProvider>
             </ToggleStorybook>
         </UserContext.Provider>
