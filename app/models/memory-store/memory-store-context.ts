@@ -17,4 +17,11 @@ export const MemoryStoreProvider = MemoryStoreContext.Provider
  * `const { someStore, someOtherStore } = useStores()`,
  * or less likely: `const MemoryStore = useStores()`
  */
-export const useMemoryStore = () => useContext(MemoryStoreContext)
+export const useMemoryStore = (mapStateToProps?: any): MemoryStore => 
+{
+    const store = useContext(MemoryStoreContext);
+    if (typeof mapStateToProps !== 'undefined') {
+        return mapStateToProps(store);
+    }
+    return store;
+}

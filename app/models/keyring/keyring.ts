@@ -10,8 +10,8 @@ export const KeyringModel = types.model("Keyring")
         wallets: types.array(WalletModel),
         mnemonic: types.maybe(types.string)
     }).actions(self => ({
-        serialize: async () => {
-            return await self.wallets.map(value => { 
+        serialize: () => {
+            return self.wallets.map(value => { 
                 return { privateKey: value.privateKey, publicKey: value.publicKey }
             });
         }

@@ -1,4 +1,4 @@
-import { cast, getRoot, Instance, SnapshotOut, types } from "mobx-state-tree"
+import { cast, flow, getRoot, Instance, SnapshotOut, types } from "mobx-state-tree"
 import { RNMnemonicKey } from "react-native-mnemonic-key";
 import { KeyringStoreModel } from "../keyring-store/keyring-store";
 import { KeyringModel } from "../keyring/keyring";
@@ -31,18 +31,25 @@ export const EngineModel = types.model("Engine")
         }
     }))
     .actions(self => ({
-        createNewKeychain: async (password: string) => {
+        createNewKeychain: flow(function* (password: string){
+            console.info(`Starting createNewKeychain`);
             self.store.clearKeyrings();
-            await self.store.persist(self.keyrings, password);
-            await self.addNewKeyring();
-            await self.store.setUnlocked();
+            console.info(`Cleared keyrings`);
+            yield self.store.persist(self.keyrings, password);
+            console.info(`Persisted keyrings`);
+            yield self.addNewKeyring();
+            console.info(`Added new keyring`);
+            self.store.setUnlocked();
             return self.keyrings; // TODO: remove
-        },
+        }),
         exportSeedPhrase: () => {
             return self.keyrings[0].mnemonic;
         },
         clearKeyrings: () => {
             self.keyrings = cast([]);
+        },
+        hello: () => {
+            console.log(`WORLD`)
         }
     }));
 

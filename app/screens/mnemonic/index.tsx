@@ -15,11 +15,19 @@ export const MnemonicScreen = () => {
 
     const createNewVaultAndKeychain = async (password) => {
         console.log("dd-dd")
+        console.log("zzdd-dd")
+        memoryStore.hello();
+        engineStore.hello();
+        engineStore.store.hello()
+        engineStore.store.setUnlocked()
+        console.log('unlocked')
+        console.log(engineStore.store.getUnlocked());
         const keyrings = await engineStore.createNewKeychain("test");
+        console.log("audd-dd")
         memoryStore.keyrings = keyrings;
         const seed = await engineStore.exportSeedPhrase();
         console.log(seed);
-        console.log("dd-dd")
+        console.log("bbdd-dd")
 	};
 
     const clearKeyrings = () => {

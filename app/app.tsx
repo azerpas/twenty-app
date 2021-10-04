@@ -27,7 +27,7 @@ import {
   useNavigationPersistence,
   RootParamList,
 } from "./navigators"
-import { RootStore, RootStoreProvider, setupRootStore, MemoryStoreProvider, MemoryStore } from "./models"
+import { RootStore, RootStoreProvider, setupRootStore, MemoryStoreProvider, MemoryStore, MemoryStoreModel, RootStoreModel } from "./models"
 import { ToggleStorybook } from "../storybook/toggle-storybook"
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
@@ -47,8 +47,8 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
  */
 function App() {
     const navigationRef = useRef<NavigationContainerRef<RootParamList>>(null)
-    const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
-    const [memoryStore, setMemoryStore] = useState<MemoryStore | undefined>(undefined)
+    const [rootStore, setRootStore] = useState<RootStore>(RootStoreModel.create());
+    const [memoryStore, setMemoryStore] = useState<MemoryStore>(MemoryStoreModel.create());
     const [user, setUser] = useState<IUserContext|null>(null);
 
     useFlipper(navigationRef);

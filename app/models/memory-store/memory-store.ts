@@ -10,7 +10,11 @@ export const MemoryStoreModel = types.model("MemoryStore")
     .props({
         isUnlocked: types.optional(types.boolean, false),
         keyrings: types.array(KeyringModel)
-    })
+    }).actions(self => ({
+        hello: () => {
+            console.log("HELLOOOO");
+        }
+    }));
 
 type MemoryStoreType = Instance<typeof MemoryStoreModel>
 export interface MemoryStore extends MemoryStoreType {}

@@ -1,4 +1,4 @@
-import { cast, castToSnapshot, Instance, SnapshotOut, types } from "mobx-state-tree"
+import { cast, castToSnapshot, flow, Instance, SnapshotOut, types } from "mobx-state-tree"
 import encryptor from "@metamask/browser-passworder";
 import { Keyring, KeyringModel } from "../keyring/keyring";
 
@@ -12,24 +12,28 @@ export const KeyringStoreModel = types.model("KeyringStore")
         keyrings: types.array(KeyringModel)
     })
     .actions(self => ({
-        persist: async (keyrings: Keyring[], password: string) => {
-            const serialized = await keyrings.map(
+        persist: flow(function* (keyrings: Keyring[], password: string) {
+            console.log(`persisting...`);
+            const serialized = keyrings.map(
                 (value) => value.serialize()
             );
-            self.encryptedKeyrings = await encryptor.encrypt(password, serialized);
-        },
+            console.log(`${serialized}`);
+            self.encryptedKeyrings = yield encryptor.encrypt(password, serialized);
+            console.log(`encrypted: ${self.encryptedKeyrings}`)
+        }),
         setUnlocked: () => { self.isUnlocked = !self.isUnlocked },
-        unlockKeyrings: async (password: string) => {
+        unlockKeyrings: flow(function* (password: string) {
             if(!self.encryptedKeyrings)
                 throw new Error("Canno't unlock keyrings: encryptedKeyrings is empty.");
             
-            const serialized = await encryptor.decrypt(password, self.encryptedKeyrings);
+            const serialized = yield encryptor.decrypt(password, self.encryptedKeyrings);
             console.log(serialized);
-        },
+        }),
         clearKeyrings: () => {
             self.keyrings = cast([]);
         },
-        hello: () => console.log("HELLOo")
+        getUnlocked: () => self.isUnlocked,
+        hello: () => console.log(`:)`)
     }))
 
 type KeyringStoreType = Instance<typeof KeyringStoreModel>
