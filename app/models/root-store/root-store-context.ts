@@ -19,4 +19,11 @@ export const RootStoreProvider = RootStoreContext.Provider
  * `const { someStore, someOtherStore } = useStores()`,
  * or less likely: `const rootStore = useStores()`
  */
-export const useStores = () => useContext(RootStoreContext)
+export const useStores = (mapStateToProps?: any): RootStore => 
+{
+    const store = useContext(RootStoreContext);
+    if (typeof mapStateToProps !== 'undefined') {
+        return mapStateToProps(store);
+    }
+    return store;
+}

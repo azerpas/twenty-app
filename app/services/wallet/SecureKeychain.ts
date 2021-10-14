@@ -21,6 +21,12 @@ const defaultOptions = {
 	service: 'com.twenty.earn'
 };
 
+export enum PasswordType {
+	BIOMETRICS = 'BIOMETRICS',
+	PASSCODE = 'PASSCODE',
+	REMEMBER_ME = 'REMEMBER_ME'
+}
+
 /**
  * Class that wraps Keychain from react-native-keychain
  * abstracting our wallet specific functionality and settings
@@ -90,7 +96,7 @@ export default {
 		return null;
 	},
 
-	async setGenericPassword(password, type) {
+	async setGenericPassword(password: string, type?: PasswordType) {
 		const authOptions = {
 			accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
             accessControl: null

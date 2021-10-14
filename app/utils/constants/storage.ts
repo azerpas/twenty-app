@@ -13,3 +13,8 @@ export const TRUE = `true`;
 export const FALSE = `false`;
 export const UNDEFINED = `undefined`;
 export const NULL = `null`;
+
+// Metrics
+export const METRICS_OPT_IN = `${APP_NAME}metricsOptIn`;
+export const DEBUG = `[Twenty DEBUG]:`;
+export const AGREED = 'agreed';
